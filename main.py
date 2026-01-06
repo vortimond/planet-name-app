@@ -5,8 +5,19 @@ attempts = 0
 random_planet = random.choice(planets)
 random_number = planets.index(random_planet)
 print("\nI have selected a planet from eight possible options:")
-print("Planets:")
-print(planets)
+print("Planets in our solar system:")
+print(f"{planets}\n")
+
+# Read the previous results from a file
+print("Your previous results:")
+try:
+    with open('planet-names-app.txt', 'r') as file:
+        lines = file.readlines()
+        for line in lines:
+            print(line.strip())
+except FileNotFoundError:
+    print("No saved results.")
+
 while True:
     user_planet = input("\nTell me which one ['q' to quit]: ")
     user_planet = user_planet.capitalize()
@@ -16,7 +27,11 @@ while True:
         if random_number == user_number:
             print("Correct!")
             print(f"The selected planet was: {random_planet}")
-            print(f"You nedded {attempts} attempts.")
+            print(f"You needed {attempts} attempts.")
+
+            # Save the results into a file and exit the app
+            with open('planet-names-app.txt', 'a') as file:
+                file.write(f"Planet = {random_planet} | Attempts = {attempts}\n")
             break
         elif random_number > user_number:
             print("The planet is farther away from the Sun.")
