@@ -19,3 +19,5 @@ while True:
             print("The planet is closer to the Sun.")
     elif user_planet == "Q":
         break
+    else:
+        print(f"'{user_planet}' is not a planet.")
